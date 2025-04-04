@@ -39,7 +39,7 @@ if __name__ == '__main__':
                         help="Path(s) to target file(s)")
 
     args = parser.parse_args()
-    check_files_exists(args.files_paths, args.env_path)
+    check_files_exists(*args.files_paths, args.env_path)
 
     load_dotenv(dotenv_path=args.env_path)
     logging.info('Environment loaded!')
