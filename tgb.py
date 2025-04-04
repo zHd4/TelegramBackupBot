@@ -2,10 +2,11 @@ import argparse
 import asyncio
 import logging
 import sys
-
 from os import getenv, path
+
 from dotenv import load_dotenv
 from telegram import Bot
+from telegram.error import NetworkError, TelegramError
 
 
 def check_files_exists(*files_paths: str):
@@ -23,9 +24,16 @@ async def send_files(token: str, chat_id: int, files_paths: list[str]):
     for file_path in files_paths:
         logging.info(f'Sending {file_path}')
 
-        with open(file_path, 'rb') as file:
-            await bot.send_document(chat_id=chat_id, document=file)
-            logging.info(f'{file_path}: sent!')
+        try:
+            with open(file_path, 'rb') as file:
+                await bot.send_document(chat_id=chat_id, document=file)
+                logging.info(f'{file_path}: sent!')
+        except NetworkError as e:
+            print(f'Network error ({file_path}): {e}')
+        except TelegramError as e:
+            print(f'Telegram API error ({file_path}): {e}')
+        except Exception as e:
+            print(f'Unexpected error ({file_path}): {e}')
 
 
 if __name__ == '__main__':
