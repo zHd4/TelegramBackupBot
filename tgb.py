@@ -29,11 +29,11 @@ async def send_files(token: str, chat_id: int, files_paths: list[str]):
                 await bot.send_document(chat_id=chat_id, document=file)
                 logging.info(f'{file_path}: sent!')
         except NetworkError as e:
-            print(f'Network error ({file_path}): {e}')
+            logging.error(f'Network error ({file_path}): {e}')
         except TelegramError as e:
-            print(f'Telegram API error ({file_path}): {e}')
+            logging.error(f'Telegram API error ({file_path}): {e}')
         except Exception as e:
-            print(f'Unexpected error ({file_path}): {e}')
+            logging.error(f'Unexpected error ({file_path}): {e}')
 
 
 if __name__ == '__main__':
