@@ -29,9 +29,13 @@ async def send_files(token: str, chat_id: int, files_paths: list[str]):
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
-    parser = argparse.ArgumentParser(description='Can send any file(s) via Telegram Bot')
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        stream=sys.stdout
+    )
 
+    parser = argparse.ArgumentParser(description='Can send any file(s) via Telegram Bot')
     parser.add_argument('-e', '--env-path', type=str, default='.env',
                         help='Path to configuration environment file (default: .env)')
 
