@@ -1,5 +1,5 @@
 # Telegram Backup Bot
-Script for sending files via Telegram Bot, can be used for backing (for example with cron).
+Script for sending files via Telegram Bot, can be used for backup (for example with cron).
 
 ## Configuration
 
